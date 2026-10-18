@@ -25,3 +25,9 @@ response = requests.get(API_URL, params=params)
 
 # 200 means the request worked
 print(response.status_code)
+
+# Convert the reply from JSON text into a Python dictionary
+data = response.json()
+
+# Print everything so we can see what the service sends back
+print(data)
