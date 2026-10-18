@@ -1,0 +1,1 @@
+"""Fetch the daily rainfall forecast for one location from Open-Meteo."""
