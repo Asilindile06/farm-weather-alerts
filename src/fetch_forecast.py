@@ -29,5 +29,9 @@ print(response.status_code)
 # Convert the reply from JSON text into a Python dictionary
 data = response.json()
 
-# Print everything so we can see what the service sends back
-print(data)
+# The "daily" section holds two lists: dates and rainfall amounts
+daily = data["daily"]
+
+# zip() pairs each date with its rainfall, then we print one line per day
+for date, rain_mm in zip(daily["time"], daily["precipitation_sum"]):
+    print(f"{date}: {rain_mm} mm")
