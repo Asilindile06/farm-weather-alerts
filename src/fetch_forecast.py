@@ -46,3 +46,13 @@ def get_rain_forecast(latitude, longitude):
 
     # Pair each date with its rainfall and return them as a list
     return list(zip(daily["time"], daily["precipitation_sum"]))
+
+
+# This block only runs when we run this file directly (not when imported)
+if __name__ == "__main__":
+    forecast = get_rain_forecast(LATITUDE, LONGITUDE)
+
+    # Only print if we actually got a forecast back
+    if forecast:
+        for date, rain_mm in forecast:
+            print(f"{date}: {rain_mm} mm")
