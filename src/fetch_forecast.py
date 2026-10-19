@@ -43,3 +43,6 @@ def get_rain_forecast(latitude, longitude):
         # The reply arrived but did not have the "daily" section we expected
         print("Unexpected reply from the weather service.")
         return None
+
+    # Pair each date with its rainfall and return them as a list
+    return list(zip(daily["time"], daily["precipitation_sum"]))
