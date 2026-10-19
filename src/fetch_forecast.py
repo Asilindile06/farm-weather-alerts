@@ -23,3 +23,23 @@ def get_rain_forecast(latitude, longitude):
         "daily": "precipitation_sum",  # total rain per day, in millimetres
         "timezone": TIMEZONE,
     }
+
+    try:
+        # Send the request; give up after 10 seconds so we never wait forever
+        response = requests.get(API_URL, params=params, timeout=10)
+
+        # Turn bad replies (like 404 or 500) into errors we can catch below
+        response.raise_for_status()
+
+        # Pull the "daily" section out of the reply
+        daily = response.json()["daily"]
+
+    except requests.exceptions.RequestException as error:
+        # Covers no internet, timeouts and bad status codes
+        print(f"Could not fetch forecast: {error}")
+        return None
+
+    except KeyError:
+        # The reply arrived but did not have the "daily" section we expected
+        print("Unexpected reply from the weather service.")
+        return None
