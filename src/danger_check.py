@@ -23,3 +23,18 @@ def find_dangerous_days(forecast, limit=RAIN_LIMIT_MM):
             dangerous.append((date, rain_mm))
 
     return dangerous
+
+# This block only runs when we run this file directly
+if __name__ == "__main__":
+    from fetch_forecast import get_rain_forecast, LATITUDE, LONGITUDE
+
+    forecast = get_rain_forecast(LATITUDE, LONGITUDE)
+
+    if forecast:
+        dangerous_days = find_dangerous_days(forecast)
+
+        if dangerous_days:
+            for date, rain_mm in dangerous_days:
+                print(f"WARNING: {rain_mm} mm of rain expected on {date}")
+        else:
+            print("No dangerous rainfall in the forecast.")
