@@ -24,17 +24,14 @@ def find_dangerous_days(forecast, limit=RAIN_LIMIT_MM):
 
     return dangerous
 
-# This block only runs when we run this file directly
 if __name__ == "__main__":
-    from fetch_forecast import get_rain_forecast, LATITUDE, LONGITUDE
+    from fetch_forecast import get_rain_forecast
+    from config import LOCATIONS
 
-    forecast = get_rain_forecast(LATITUDE, LONGITUDE)
+    # Check every farm area, one at a time
+    for location in LOCATIONS:
+        forecast = get_rain_forecast(location["latitude"], location["longitude"])
 
-    if forecast:
-        dangerous_days = find_dangerous_days(forecast)
-
-        if dangerous_days:
-            for date, rain_mm in dangerous_days:
-                print(f"WARNING: {rain_mm} mm of rain expected on {date}")
-        else:
-            print("No dangerous rainfall in the forecast.")
+        if forecast:
+            for date, rain_mm in find_dangerous_days(forecast):
+                print(f"WARNING for {location['name']}: {rain_mm} mm on {date}")
