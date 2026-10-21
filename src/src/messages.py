@@ -14,3 +14,7 @@ def zulu_alert(place, date, rain_mm):
         f"ISEXWAYISO SEMVULA e{place}: kulindeleke imvula enkulu engu-{rain_mm} mm "
         f"ngomhlaka {date}. Sicela uvikele izitshalo nemfuyo yakho."
     )
+
+def bilingual_alert(place, date, rain_mm):
+    """Return the isiZulu and English alerts together, isiZulu first."""
+    return zulu_alert(place, date, rain_mm) + "\n\n" + english_alert(place, date, rain_mm)
