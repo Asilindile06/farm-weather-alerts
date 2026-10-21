@@ -18,3 +18,4 @@ def zulu_alert(place, date, rain_mm):
 def bilingual_alert(place, date, rain_mm):
     """Return the isiZulu and English alerts together, isiZulu first."""
     return zulu_alert(place, date, rain_mm) + "\n\n" + english_alert(place, date, rain_mm)
+
